@@ -1,20 +1,51 @@
 
-// var numOfWinner = 0;
-// var numOfLoss = 0;
+// initializing some values
+let totalAttemps = 5;
+let attempts = 0;
+let totalWons = 0;
+let totallosts = 0;
 
-// for (var i = 1; i <= 5; i++) {
-//     var guessNumber = parseInt(prompt("Enter a number from 1 to 5 : "));
 
-//     var randomNumber = Math.floor(Math.random() * 5) + 1;
+// finding elements
+const form = document.querySelector("form");
+const cardBody = document.querySelector(".card-body");
+const guessingNumber = form.querySelector("#guessingNumber");
+const btn = form.querySelector("#btn");
+const resultText = cardBody.querySelector(".resultText");
+const lostWonMessage = document.createElement("p");
+const remainingAttempts = cardBody.querySelector(".remainingAttempts");
 
-//     if (guessNumber == randomNumber) {
-//         console.log("You have winner. Random number is " + randomNumber);
-//         numOfWinner++;
-//     } else {
-//         console.log("You have loss. Random number was " + randomNumber);
-//         numOfLoss++;
-//     }
-// }
 
-// document.write("Total Number of Winner 🏆 = " + numOfWinner + "<br>");
-// document.write("Total Number of Loss 😔 = " + numOfLoss + "<br>");
+form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    attempts++;
+    if (attempts > 5) {
+        guessingNumber.ariaDisabled = true;
+        btn.ariaDisabled = true;
+    } else {
+        checkResult(guessingNumber.value);
+        remainingAttempts.innerHTML = `Remaining attempts ⌛: ${totalAttemps - attempts}`;
+    }
+    guessingNumber.value = "";
+});
+
+
+function checkResult(guessingNumber) {
+    const randomNumber = getRandomNumber(5);
+    if (guessingNumber == randomNumber) {
+        resultText.innerHTML = 'You have won 🏆';
+        totalWons++;
+    } else {
+        resultText.innerHTML = `You have lost 😔; Random number was : ${randomNumber}`;
+        totallosts++;
+    }
+    lostWonMessage.innerHTML = `Won : ${totalWons} , Lost : ${totallosts}`;
+    lostWonMessage.classList.add("large-text");
+    cardBody.appendChild(lostWonMessage);
+}
+
+
+function getRandomNumber(limit) {
+    return Math.floor(Math.random() * limit) + 1;
+}
