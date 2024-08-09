@@ -21,10 +21,11 @@ form.addEventListener("submit", function (event) {
 
     attempts++;
     if (attempts > 5) {
-        guessingNumber.ariaDisabled = true;
-        btn.ariaDisabled = true;
+        guessingNumber.disabled = true;
+        btn.disabled = true;
     } else {
-        checkResult(guessingNumber.value);
+        let guessNumber = Number(guessingNumber.value);
+        checkResult(guessNumber);
         remainingAttempts.innerHTML = `Remaining attempts ⌛: ${totalAttemps - attempts}`;
     }
     guessingNumber.value = "";
