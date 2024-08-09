@@ -27,7 +27,7 @@ If you run this project locally, then follow these steps
 1. Clone the Repository
 
    ```sh
-  https://github.com/pranto113015/Number-Guessing-Game-JavaScript.git
+    https://github.com/pranto113015/Number-Guessing-Game-JavaScript.git
    ```
 
 2. Navigate to the Project Directory
